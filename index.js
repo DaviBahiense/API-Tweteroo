@@ -7,7 +7,13 @@ app.use(json())
 
 
 let user
-let tweet
+let tweet = [
+	{
+		username: "bobesponja",
+		avatar: "https://super.abril.com.br/wp-content/uploads/2020/09/04-09_gato_SITE.jpg?quality=70&strip=info",
+	  tweet: "eu amo o hub"
+	}
+]
 
 app.post("/sign-up", (req, res) => {
     user = req.body 
@@ -16,8 +22,7 @@ app.post("/sign-up", (req, res) => {
 });
 
 app.get("/tweets", (req, res) => {
-
-    res.send(user)
+    res.send(tweet)
 });
 
 app.listen(5000)
