@@ -23,12 +23,14 @@ app.post("/sign-up", (req, res) => {
    
     if (!user.username) {
         res.status(400).json("Nome em branco")
+        return
     }
     if ( !isImage ) {
-        res.status(400).json("Formato da imagem não aceito")
+        res.status(400).json("Formato da imagem não aceito ou em branco")
+        return
     }
 
-    res.send("OK")
+    res.status(201).send("CREATED") 
 });
 
 app.get("/tweets", (req, res) => {
@@ -38,18 +40,19 @@ app.get("/tweets", (req, res) => {
 app.post("/tweets", (req, res) => {
     const tweet = req.body
 
-    if (!tweet.tweet) {
+    if (!tweet.tweet || !tweet.username) {
         res.status(400).json("Mensagem em branco")
-    }
-
+        return
+    } 
+ 
     tweet.avatar = user.avatar
-
+    console.log(tweet)
     if (tweets.length === 10) {
         tweets.shift()
     }
     
     tweets.push(tweet)
-    res.send("OK")
+    res.status(201).send("CREATED") 
 });
 
 app.listen(5000)
